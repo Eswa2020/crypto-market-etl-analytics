@@ -52,7 +52,7 @@ Public Data Sources
     Power BI
 (dashboards + reporting)
 
-crypto-market-data-pipeline/
+crypto-market-etl-analytics/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
