@@ -1,61 +1,58 @@
-# Crypto Market ETL & Analytics Pipeline
+# Crypto Market Data Pipeline
 
 ## Overview
-This project is an end-to-end data pipeline for cryptocurrency market analysis. It extracts crypto price and market data from public APIs, transforms and cleans the data, loads it into PostgreSQL, and supports downstream analysis through SQL queries and Power BI dashboards.
+This project is an end-to-end crypto market data pipeline built with Python, PostgreSQL, SQL, and Power BI. It is designed to demonstrate how data from multiple public cryptocurrency sources can be ingested, structured, transformed, analyzed, and presented in a business-friendly dashboard format.
 
-The goal is to demonstrate production-style data thinking across ingestion, storage, transformation, analysis, and business-facing reporting.
+Python is used for data extraction and loading, PostgreSQL is used to store and combine datasets, SQL is used for transformation and analytical querying, and Power BI is used for dashboard reporting and visual storytelling.
+
+## Project Goal
+The goal of this project is to build a structured analytics workflow for cryptocurrency market monitoring by combining data engineering, SQL analysis, and business intelligence.
+
+This project is intended to show:
+- data ingestion from public sources
+- database design and loading in PostgreSQL
+- SQL-based transformation and analysis
+- dashboard development in Power BI
+- end-to-end pipeline thinking for analytics and data roles
 
 ## Business Problem
-Crypto markets generate high-volume, fast-changing data that can be difficult to track consistently across assets and time periods. Analysts, traders, and decision-makers need a structured workflow to collect reliable market data, clean it, store it in a queryable database, and generate insights for monitoring trends, volatility, and asset performance.
+Cryptocurrency data changes rapidly and comes from multiple public sources. Analysts and decision-makers need a structured pipeline that can collect this data, store it reliably, combine it across sources, and generate useful insights for monitoring market movement, asset performance, and trading activity.
 
-This project addresses that need by building a repeatable ETL pipeline and analytics layer for cryptocurrency market data.
+Without a proper pipeline, analysis becomes inconsistent, repetitive, and difficult to scale.
 
-## Project Objectives
-- Extract cryptocurrency market data from a public source
-- Clean and standardize the data for analysis
-- Load structured data into PostgreSQL
-- Write SQL queries for market insights and KPI reporting
-- Build a Power BI dashboard for visual exploration
-- Demonstrate an end-to-end analytics workflow suitable for data engineering and analytics roles
+## Solution
+This project builds a multi-stage pipeline:
+
+1. Python extracts cryptocurrency data from public APIs or datasets  
+2. Raw data is loaded into PostgreSQL staging tables  
+3. SQL is used to combine, clean, and transform the data into analysis-ready tables  
+4. Analytical SQL queries generate KPIs and insights  
+5. Power BI is used to present interactive dashboards and visual summaries  
 
 ## Tech Stack
-- **Python**: data extraction, transformation, automation
-- **PostgreSQL**: structured storage and querying
-- **SQL**: exploratory and reporting queries
-- **Power BI**: dashboarding and business intelligence
-- **Pandas / Requests / SQLAlchemy / Psycopg2**: ETL components
+- **Python**: data extraction and database loading
+- **PostgreSQL**: data storage and table modeling
+- **SQL**: transformations, joins, aggregations, and analysis
+- **Power BI**: dashboarding and reporting
+- **Pandas / Requests / SQLAlchemy / Psycopg2**: pipeline support libraries
 
-## Pipeline Architecture
-1. **Extract**  
-   Pull cryptocurrency market data from a public API
-
-2. **Transform**  
-   Clean missing values, standardize columns, parse timestamps, and prepare structured tables
-
-3. **Load**  
-   Insert processed data into PostgreSQL tables
-
-4. **Analyze**  
-   Use SQL queries to generate insights such as top-performing assets, price volatility, and market cap trends
-
-5. **Visualize**  
-   Connect Power BI to PostgreSQL or exported query outputs to build dashboards
-
-## Dataset / Data Source
-This project uses publicly available cryptocurrency market data from an external API source.
-
-Typical fields may include:
-- coin name
-- symbol
-- current price
-- market capitalization
-- trading volume
-- price change percentage
-- timestamp / refresh time
-
-## Repository Structure
+## Proposed Architecture
 ```text
-crypto-market-etl-analytics/
+Public Data Sources
+        ↓
+      Python
+(extract + prepare + load)
+        ↓
+   PostgreSQL
+(staging + integrated tables)
+        ↓
+       SQL
+(transform + analyze + aggregate)
+        ↓
+    Power BI
+(dashboards + reporting)
+
+crypto-market-data-pipeline/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
@@ -64,13 +61,12 @@ crypto-market-etl-analytics/
 │   └── processed/
 ├── sql/
 │   ├── schema.sql
-│   ├── load_queries.sql
+│   ├── staging_queries.sql
 │   └── analysis_queries.sql
 ├── src/
 │   ├── extract.py
-│   ├── transform.py
-│   ├── load.py
-│   ├── pipeline.py
+│   ├── load_to_postgres.py
+│   ├── analyze.py
 │   └── config.py
 ├── notebooks/
 │   └── crypto_analysis.ipynb
